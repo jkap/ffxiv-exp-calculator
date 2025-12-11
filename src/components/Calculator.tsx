@@ -1,24 +1,13 @@
-import { useComputed } from "@preact/signals";
 import { useId } from "preact/hooks";
+import { CalculateRequiredExpArgs } from "../lib/calculator";
 import {
-  calculateRequiredExp,
-  CalculateRequiredExpArgs,
-} from "../lib/calculator";
-import { usePersistedSignal } from "../lib/persist-signals";
+  requiredExp,
+  startingExp,
+  startingLevel,
+  targetLevel,
+} from "../lib/signals";
 
 export function Calculator() {
-  const startingLevel = usePersistedSignal("startingLevel", 1);
-  const targetLevel = usePersistedSignal("targetLevel", 100);
-  const startingExp = usePersistedSignal("startingExp", 0);
-
-  const requiredExp = useComputed(() =>
-    calculateRequiredExp({
-      startingLevel: startingLevel.value,
-      startingExp: startingExp.value,
-      targetLevel: targetLevel.value,
-    })
-  );
-
   const startingLevelId = useId();
   const targetLevelId = useId();
   const startingExpId = useId();
@@ -37,11 +26,15 @@ export function Calculator() {
           class="input"
           value={startingLevel.value}
           step={1}
-          onChange={(e) => startingLevel.value = e.currentTarget.valueAsNumber}
-          min={CalculateRequiredExpArgs.shape.startingLevel.minValue ??
-            undefined}
-          max={CalculateRequiredExpArgs.shape.startingLevel.maxValue ??
-            undefined}
+          onChange={(e) =>
+            (startingLevel.value = e.currentTarget.valueAsNumber)
+          }
+          min={
+            CalculateRequiredExpArgs.shape.startingLevel.minValue ?? undefined
+          }
+          max={
+            CalculateRequiredExpArgs.shape.startingLevel.maxValue ?? undefined
+          }
         />
 
         <label className="label" for={targetLevelId}>
@@ -53,11 +46,9 @@ export function Calculator() {
           class="input"
           value={targetLevel.value}
           step={1}
-          onChange={(e) => targetLevel.value = e.currentTarget.valueAsNumber}
-          min={CalculateRequiredExpArgs.shape.targetLevel.minValue ??
-            undefined}
-          max={CalculateRequiredExpArgs.shape.targetLevel.maxValue ??
-            undefined}
+          onChange={(e) => (targetLevel.value = e.currentTarget.valueAsNumber)}
+          min={CalculateRequiredExpArgs.shape.targetLevel.minValue ?? undefined}
+          max={CalculateRequiredExpArgs.shape.targetLevel.maxValue ?? undefined}
         />
 
         <label className="label" for={startingExpId}>
@@ -69,12 +60,12 @@ export function Calculator() {
           class="input"
           value={startingExp.value}
           step={1}
-          onChange={(e) => startingExp.value = e.currentTarget.valueAsNumber}
+          onChange={(e) => (startingExp.value = e.currentTarget.valueAsNumber)}
           min={0}
         />
 
         <span
-          class="tabular-nums text-5xl pt-4"
+          class="tabular-nums text-5xl pt-4 text-right select-all"
           aria-live="polite"
           aria-label={requiredExp.value.toLocaleString()}
         >
