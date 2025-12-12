@@ -3,13 +3,13 @@ import { ExpCards } from "./components/ExpCards";
 
 export function App() {
   return (
-    <div class="px-4 py-8 mx-auto min-h-screen flex flex-col gap-6">
-      <div class="container mx-auto flex flex-col items-center justify-center gap-6">
-        <h1 class="text-4xl font-bold">FFXIV Exp Calculator</h1>
+    <div class="px-4 py-8 mx-auto min-h-screen flex flex-col gap-6 container">
+      <h1 class="text-4xl font-bold">FFXIV Exp Calculator</h1>
+      <div class="grid auto-cols-min grid-flow-col gap-12">
         <Calculator />
         <ExpCards />
       </div>
-      <footer class="footer footer-center max-w-sm mx-auto">
+      <footer class="footer mx-auto">
         <aside>
           <p>
             made by jkap. if you have problems send me a dm{" "}

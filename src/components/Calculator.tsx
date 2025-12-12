@@ -13,17 +13,16 @@ export function Calculator() {
   const startingExpId = useId();
 
   return (
-    <div class="flex flex-col gap-4">
-      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Calculator</legend>
-
+    <div class="flex flex-col prose">
+      <h2>Calculator</h2>
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-sm border p-4 not-prose">
         <label className="label" for={startingLevelId}>
           Starting Level
         </label>
         <input
           id={startingLevelId}
           type="number"
-          class="input"
+          class="input w-full"
           value={startingLevel.value}
           step={1}
           onChange={(e) =>
@@ -43,7 +42,7 @@ export function Calculator() {
         <input
           id={targetLevelId}
           type="number"
-          class="input"
+          class="input w-full"
           value={targetLevel.value}
           step={1}
           onChange={(e) => (targetLevel.value = e.currentTarget.valueAsNumber)}
@@ -57,7 +56,7 @@ export function Calculator() {
         <input
           id={startingExpId}
           type="number"
-          class="input"
+          class="input w-full"
           value={startingExp.value}
           step={1}
           onChange={(e) => (startingExp.value = e.currentTarget.valueAsNumber)}
